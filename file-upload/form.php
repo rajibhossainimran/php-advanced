@@ -1,3 +1,20 @@
+<?php
+
+if(isset($_POST['submit'])){
+    $imageName =$_FILES['fileUpload']['name'];
+    $temp = $_FILES['fileUpload']['tmp_name'];
+    $folder = 'folderImage/';
+
+    // upload file 
+    move_uploaded_file($temp,$folder.$imageName);
+    echo "Successfully Uploaded!";
+
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +33,10 @@
         /* Body Styling */
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            
             background: linear-gradient(135deg, #2471a3 , #2e86c1 );
         }
 
@@ -76,9 +94,24 @@
         <form action="" method="post" enctype="multipart/form-data">
             <label for="file">File Upload</label>
             <input type="file" name="fileUpload" id="file">
-            <button type="submit">Upload File</button>
+            <button type="submit" name="submit">Upload File</button>
         </form>
     </section>
 </body>
 </html>
+<!-- display images  -->
+<?php
+$imageFolder = "folderImage/"; // Folder containing images
+$images = glob($imageFolder . "/*.{jpg,png,gif,jpeg}", GLOB_BRACE);
+
+if (count($images) > 0) {
+    foreach ($images as $image) {
+        echo '<img src="' . $image . '" alt="image">';
+    }
+} else {
+    echo "No images have been uploaded yet.";
+}
+?>
+
+
 
