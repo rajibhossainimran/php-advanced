@@ -12,6 +12,7 @@ if(isset($_POST['submit'])){
     if (!in_array($fileType, ["jpg", "png", "jpeg", "gif"])) {
         $msg2 = "Also Sorry, only jpg, png, jpeg, or gif formats are allowed!";
     }
+    // check image type 
     elseif($kb<100){
         // upload file 
         move_uploaded_file($temp,$folder.$imageName);
@@ -116,7 +117,7 @@ if(isset($_POST['submit'])){
 </html>
 <!-- display images  -->
 <?php
-$imageFolder = "folderImage/"; // Folder containing images
+$imageFolder = "folderImage/"; 
 $images = glob($imageFolder . "/*.{jpg,png,gif,jpeg}", GLOB_BRACE);
 
 if (count($images) > 0) {
@@ -127,6 +128,3 @@ if (count($images) > 0) {
     echo "No images have been uploaded yet.";
 }
 ?>
-
-
-
