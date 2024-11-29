@@ -4,10 +4,21 @@ if(isset($_POST['submit'])){
     $imageName =$_FILES['fileUpload']['name'];
     $temp = $_FILES['fileUpload']['tmp_name'];
     $folder = 'folderImage/';
+    $fileSize = $_FILES['fileUpload']['size'];
+    $kb = $fileSize/1024;
+    $fileType = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
 
-    // upload file 
-    move_uploaded_file($temp,$folder.$imageName);
-    echo "Successfully Uploaded!";
+    // check image size 
+    if (!in_array($fileType, ["jpg", "png", "jpeg", "gif"])) {
+        $msg2 = "Also Sorry, only jpg, png, jpeg, or gif formats are allowed!";
+    }
+    elseif($kb<100){
+        // upload file 
+        move_uploaded_file($temp,$folder.$imageName);
+        echo "Successfully Uploaded!";
+    }else{
+        $msg ="Image is too large. Your image must be a maximum of 100 KB.";
+    }
 
 }
 
@@ -97,6 +108,10 @@ if(isset($_POST['submit'])){
             <button type="submit" name="submit">Upload File</button>
         </form>
     </section>
+    <?php
+    echo isset($msg) ? $msg : '';
+    echo isset($msg2) ? $msg2 : '';
+    ?>
 </body>
 </html>
 <!-- display images  -->
