@@ -3,6 +3,7 @@ if (isset($_POST['submit'])) {
     $name = htmlspecialchars(trim($_POST['username']));
     $email = htmlspecialchars(trim($_POST['useremail']));
 
+    // cookie set data 
     if (!empty($name) && !empty($email)) {
         setcookie("username", $name, time() + 3600, '/');
         setcookie("useremail", $email, time() + 3600, '/');
@@ -115,3 +116,27 @@ if (isset($_POST['submit'])) {
     </section>
 </body>
 </html>
+<!-- display cookie data  -->
+<?php
+if (isset($_COOKIE['username']) && isset($_COOKIE['useremail'])) {
+    $username = $_COOKIE['username'];
+    $useremail = $_COOKIE['useremail'];
+
+    echo "<table border='1' style='border-collapse: collapse; width: 50%; text-align: left;'>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>" . htmlspecialchars($username) . "</td>
+            </tr>
+            <tr>
+                <td>User Email</td>
+                <td>" . htmlspecialchars($useremail) . "</td>
+            </tr>
+          </table>";
+} else {
+    echo "No cookies found!";
+}
+?>
