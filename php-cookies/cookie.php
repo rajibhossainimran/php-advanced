@@ -1,3 +1,20 @@
+<?php
+if (isset($_POST['submit'])) {
+    $name = htmlspecialchars(trim($_POST['username']));
+    $email = htmlspecialchars(trim($_POST['useremail']));
+
+    if (!empty($name) && !empty($email)) {
+        setcookie("username", $name, time() + 3600, '/');
+        setcookie("useremail", $email, time() + 3600, '/');
+        echo "Cookies have been set successfully!";
+    } else {
+        echo "Please fill in all fields.";
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +34,7 @@
             background: linear-gradient(135deg, #f3e6e8, #c9d6ff);
             color: #333;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -92,7 +110,7 @@
             <label for="useremail">User Email:</label>
             <input type="text" name="useremail" id="useremail" placeholder="Enter your email" required>
 
-            <button type="submit">Set Cookie</button>
+            <button type="submit" name="submit">Set Cookie</button>
         </form>
     </section>
 </body>
