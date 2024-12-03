@@ -8,7 +8,8 @@
     <title>date and time</title>
 </head>
 <body>
-    <section>
+    <h1 style="text-align: center;">Display Bangladesh Local Time</h1>
+    <section style="text-align: center;">
         <form action="" method="post">
             <button type="submit" name="getTime">display time</button>
         </form>
