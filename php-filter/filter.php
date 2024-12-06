@@ -35,6 +35,7 @@ if(isset($_POST['btnSubmit'])){
             background: linear-gradient(135deg, #6c63ff, #00bcd4);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
