@@ -1,3 +1,12 @@
+<?php 
+$db = mysqli_connect("localhost","root", "","student_data");
+if(isset($_GET["deleteid"])){
+    $delete_id = $_GET['deleteid'];
+    $sql = "DELETE FROM student WHERE id =$delete_id ";
+    if(mysqli_query($db, $sql)==true){
+        header("location:display.php");
+}}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +53,7 @@
                     <td>$id</td>
                     <td>$name</td>
                     <td>$email</td>
-                    <td><a href='dbConnection.php?deleteid=$id'>Delete</a></td>
+                    <td><a href='display.php?deleteid=$id'>Delete</a></td>
        </tr> ";
     }
     }
