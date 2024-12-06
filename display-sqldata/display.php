@@ -2,7 +2,7 @@
 $db = mysqli_connect("localhost","root", "","student_data");
 if(isset($_GET["deleteid"])){
     $delete_id = $_GET['deleteid'];
-    $sql = "DELETE FROM student WHERE id =$delete_id ";
+    $sql = "DELETE FROM student_table WHERE id =$delete_id ";
     if(mysqli_query($db, $sql)==true){
         header("location:display.php");
 }}
