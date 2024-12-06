@@ -25,24 +25,31 @@
 <body>
     <h1>Student Information</h1>
     <table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Delete</th>
+        
+    </tr>
+    <?php 
+    $db = mysqli_connect("localhost","root", "","student_data");
 
-        <tbody>
-            <?php
-            $data = new mysqli('localhost','root','','student_data');
-            $sql = "SELECT id, name, email FROM student_table";
-                $display = $data->query($sql);
-
-                if ($display->num_rows > 0) {
-                    echo "<table border='1'>";
-                    echo "<tr><th>ID</th><th>Name</th><th>Age</th></tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["email"] . "</td></tr>";
-                    }
-                    echo "</table>";
-                }
-            
-            ?>
-        </tbody>
-    </table>
+    if (!$db) {
+        die("Connection failed: " . mysqli_connect_error());
+    } else {
+        $user = $db->query("select * from student_table");
+          while(list($id,$name, $email) = $user->fetch_row()) {
+        echo "<tr>
+                    <td>$id</td>
+                    <td>$name</td>
+                    <td>$email</td>
+                    <td><a href='dbConnection.php?deleteid=$id'>Delete</a></td>
+       </tr> ";
+    }
+    }
+    
+    ?>
+</table>
 </body>
 </html>
